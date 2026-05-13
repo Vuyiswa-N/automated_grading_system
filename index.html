@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated short-answer grading</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    
+    <header>
+        <h1>Automated short-answer grading</h1>
+        <p>Physical Sciences (Grade 12 CAPS)</p>
+    </header>
+    
+    
+    <form action="/upload" method="POST" enctype="multipart/form-data" id="uploadForm">
+
+       
+        <div class="grid">
+
+           
+            <div class="card">
+                <h2>Student Answer</h2>
+                <label for="studentFile">Upload Student Answer (.txt file)</label>
+                <input type="file" name="student" id="studentFile" accept=".txt">
+            </div>
+
+          
+            <div class="card">
+                <h2>Memo Answer</h2>
+                <label for="memoFile">Upload Memo Answer (.txt file)</label>
+                <input type="file" name="memo" id="memoFile" accept=".txt">
+            </div>
+
+        </div>
+
+        
+        <div class="actions">
+            <button type="submit" onclick="return validateForm()">Process Uploaded Files</button>
+        </div>
+
+    </form>
+
+</div>
+
+<script>
+function validateForm() {
+    const studentFile = document.getElementById("studentFile").files[0];
+    const memoFile    = document.getElementById("memoFile").files[0];
+
+    if (!studentFile || !memoFile) {
+        alert("Please upload both student and memo files.");
+        return false;
+    }
+    return true;
+}
+</script>
+
+</body>
+</html>

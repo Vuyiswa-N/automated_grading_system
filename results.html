@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated short-answer grading</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>Automated short-answer grading</h1>
+        <p>Physical Sciences (Grade 12 CAPS)</p>
+    </header>
+
+    <div class="result-card">
+
+        <h2>N-Gram Model Comparison</h2>
+
+        <table class="scores-table">
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th>Score</th>
+                    <th>What it measures</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Bigram</td>
+                    <td><span class="score-badge">{{ bigram_score }}%</span></td>
+                    <td>Two-word phrase overlap</td>
+                </tr>
+                <tr>
+                    <td>Trigram</td>
+                    <td><span class="score-badge">{{ trigram_score }}%</span></td>
+                    <td>Three-word phrase overlap</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="fusion-card {{ 'flagged' if fusion_score < 50 else 'passed' }}">
+            <div class="fusion-label">Estimated Grade (Bigram + Trigram Fusion)</div>
+            <div class="fusion-score">{{ fusion_score }}%</div>
+            <div class="fusion-verdict">{{ verdict }}</div>
+        </div>
+
+        <h3>Processed Student Answer</h3>
+        <p class="processed-text">{{ student_processed }}</p>
+
+        <h3>Processed Memo Answer</h3>
+        <p class="processed-text">{{ memo_processed }}</p>
+
+        <div class="actions">
+            <a href="/" class="btn">&#8592; Mark Another Answer</a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
